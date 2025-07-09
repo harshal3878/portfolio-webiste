@@ -8,5 +8,13 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: push
-        run: echo "Hello World"
+      - uses: actions/checkout@master
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete --exlude '.git*/*'
+        env:
+          SOURCE_DIR: ./
+          AWS_REGION: ap-south-1
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}          
