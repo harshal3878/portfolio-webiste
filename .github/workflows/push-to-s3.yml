@@ -1,0 +1,12 @@
+name: push-to-s3
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: push
+        run: echo "Hello World"
